@@ -1,9 +1,9 @@
-Snake Game
+# Snake Game
 
 This is a basic console-based Snake game developed in C++.
 
 
-Game Overview
+### Game Overview
 
 The game consists of a player-controlled snake that moves around a game board 
 trying to eat a target without running into walls or its own tail. The snake
@@ -13,12 +13,12 @@ snake collides with a wall or its own tail, the game ends and the player has
 to restart.
 
 
-Requirements
+### Requirements
 
 1. A C++ compiler, such as Visual Studio or Code::Blocks.
 2. The conio.h and Windows.h header files.
 
-Running the Game
+### Running the Game
 
 -> Clone the repository to your local machine.
 
@@ -29,10 +29,9 @@ Running the Game
 -> Use the arrow keys or the WASD keys to control the snake.
 
 
-Code Overview
+### Code Overview
 
-• The game is divided into several functions, including game_Setup(), 
-  main_Menu(), normal_setup(), game_window(), game_input(), and game_program().
+• The game is divided into several functions, including game_Setup(), main_Menu(), normal_setup(), game_window(), game_input(), and game_program().
 
 • The game_Setup() function initializes some global variables that are used throughout the game.
 
@@ -47,7 +46,7 @@ Code Overview
 • The game_program() function handles the game's logic, including moving the snake and checking for collisions.
 
 
-Conclusion
+### Conclusion
 
 • This game is a simple implementation of the classic Snake game. It can be used as a starting point
 for more advanced game development or as a fun project for learning C++.
