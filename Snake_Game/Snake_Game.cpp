@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include<conio.h>
 #include<Windows.h>
 
@@ -6,8 +6,8 @@ using namespace std;
 
 // Intialising the variables
 bool normalGame, mainMenu, snakeGame;
-const int width = 60;
-const int height = 30;
+const int width = 50;
+const int height = 20;
 
 
 // User variables
@@ -25,6 +25,13 @@ int score;
 enum directions { STOP = 0, UP, DOWN, LEFT, RIGHT };
 directions dir;
 
+void game_Over() {
+	normalGame = false;
+	mainMenu = true;
+	taillength = 0;
+	score = 0;
+}
+
 void game_Setup() {
 	snakeGame = true;
 	mainMenu = true;
@@ -33,7 +40,31 @@ void game_Setup() {
 
 void main_Menu() {
 	system("cls");
-	cout << "This is the Main Menu"; 
+	char heart = 3;
+	cout << "Hello there !" << endl;
+	cout << "Welcome to the Snake Game" << endl;
+
+	cout << endl << endl;
+	cout << "---  Instructions ----" << endl;
+	cout << "Player can play this game by using 'W A S D'  or by 'ARROW KEYS' " << endl;
+	cout << "Press 'Enter' to play the game" << endl << endl;
+	cout << "Made with " << heart << " by Raj" << endl;
+
+	if (GetAsyncKeyState(VK_RETURN)) {
+		mainMenu = false;
+	}
+	else if (GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A')) {
+		dir = STOP;
+	}
+	else if (GetAsyncKeyState(VK_RIGHT) || GetAsyncKeyState('D')) {
+		dir = STOP;
+	}
+	else if (GetAsyncKeyState(VK_DOWN) || GetAsyncKeyState('S')) {
+		dir = STOP;
+	}
+	else if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState('W')) {
+		dir = STOP;
+	}
 }
 
 void normal_setup() {
@@ -107,19 +138,25 @@ void game_window() {
 
 void game_input() {
 
-	if (GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A') && dir != RIGHT) {
-		dir = LEFT;
-	}
-	else if (GetAsyncKeyState(VK_RIGHT) || GetAsyncKeyState('D') && dir != LEFT) {
-		dir = RIGHT;
-	}
-	else if (GetAsyncKeyState(VK_DOWN)  || GetAsyncKeyState('S') && dir != UP) {
-		dir = DOWN;
-	}
-	else if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState('W') && dir != DOWN) {
-		dir = UP;
-	}
+	if (mainMenu == false && normalGame == true) {
 
+		if (GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A') && dir != RIGHT) {
+			dir = LEFT;
+		}
+		else if (GetAsyncKeyState(VK_RIGHT) || GetAsyncKeyState('D') && dir != LEFT) {
+			dir = RIGHT;
+		}
+		else if (GetAsyncKeyState(VK_DOWN)  || GetAsyncKeyState('S') && dir != UP) {
+			dir = DOWN;
+		}
+		else if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState('W') && dir != DOWN) {
+			dir = UP;
+		}
+		else if (GetAsyncKeyState(VK_RETURN)) {
+			return;
+		}
+	}
+	 
 	
 }
 
@@ -157,13 +194,13 @@ void game_program() {
 	}
 	// Snake border hit
 	if (x <= 0 || x >= width - 1 || y < 0 || y > height - 1) {
-		normalGame = false;
+		game_Over();
 	}
 
 	// Snake Tail Hit
 	for (int i = 0; i < taillength; i++) {
 		if (x == tailX[i] && y == tailY[i]) {
-			normalGame = false;
+			game_Over();
 		}
 	}
 
@@ -192,7 +229,7 @@ int main() {
 				game_window();
 				game_input();
 				game_program();
-				Sleep(80);
+				Sleep(60);
 			}
 		}
 	}
